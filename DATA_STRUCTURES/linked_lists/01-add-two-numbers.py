@@ -8,9 +8,9 @@ You may assume the two numbers do not contain any leading zero,
 except the number 0 itself.
 """
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=0, next_node=None):
         self.val = val
-        self.next = next
+        self.next = next_node
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:

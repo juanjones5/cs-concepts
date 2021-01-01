@@ -9,6 +9,8 @@ number of times. Two combinations are unique if the frequency
 of at least one of the chosen numbers is different.
 '''
 
+from typing import List
+
 
 class Solution:
     # BACKTRACKING ALTERNATIVE ALL IN ONE FUNCTION

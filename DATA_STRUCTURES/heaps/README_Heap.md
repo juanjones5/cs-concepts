@@ -8,7 +8,7 @@ at its children.
 - max-heap
 - min-heap
 
-Implemented as an array. The children of a node at index i ar at 2i+1 and 2i+2
+Implemented as an array. The children of a node at index i are at 2i+1 and 2i+2
 
 Time:
 - Insert `O(log n)`
