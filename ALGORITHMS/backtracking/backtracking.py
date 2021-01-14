@@ -8,15 +8,10 @@ class Backtracking:
         return v in self.solution
 
     def solve(self):
-        if (
-            len(self.solution) == self.n 
-            and self.solution[len(self.solution)] == 0
-        ):
+        if len(self.solution) == self.n and self.solution[len(self.solution)] == 0:
             return True
         for i in range(self.n):
             self.solution.append(i)
             worked = self.solve()
             if worked:
                 return True
-
-Solution().hola()

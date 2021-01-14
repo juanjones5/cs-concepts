@@ -1,22 +1,37 @@
 """
-ITERATIVE BINARY SEARCH
+BINARY SEARCH
+
+For sorted arrays
+
+Time Complexity: O(log N)
+Space: O(1)
+
+Note about ending status: 
+- (while lo <= hi) => lo == hi+1
+- (while lo < hi) => lo == hi
 """
+
+
 def binary_search(arr, k):
+    """
+    ITERATIVE BINARY SEARCH
+    """
     lo, hi = 0, len(arr) - 1
     while lo <= hi:
         mid = lo + (hi - lo) // 2
-        if arr[mid] == k:
-            return mid
-        elif arr[mid] > k:
+        if arr[mid] > k:
             hi = mid - 1
-        else:
+        elif arr[mid] < k:
             lo = mid + 1
+        else:
+            return mid
     return -1
 
-"""
-RECURSIVE BINARY SEARCH
-"""
+
 def recursive_binary_search(arr, k, lo=0, hi=None):
+    """
+    RECURSIVE BINARY SEARCH
+    """
     if not hi:
         hi = len(arr) - 1
     if hi >= lo:
@@ -31,12 +46,12 @@ def recursive_binary_search(arr, k, lo=0, hi=None):
         return -1
 
 
-# Test array 
-arr = [ 2, 3, 4, 10, 40 ] 
+# Test array
+arr = [2, 3, 4, 10, 40]
 x = 10
-  
-# Function call 
-result = binary_search(arr, x) 
-result2 = recursive_binary_search(arr, x) 
+
+# Function call
+result = binary_search(arr, x)
+result2 = recursive_binary_search(arr, x)
 print(result)
 print(result2)

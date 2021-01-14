@@ -3,13 +3,14 @@ The knight is placed on the first block of an empty board and, moving
 according to the rules of chess, must visit each square exactly once.
 """
 from pprint import pprint
+
 TOTAL_POSSIBLE_MOVES = 8
 # These two lists of moves are synced
 X_POSSIBLE_MOVES = [2, 1, -1, -2, -2, -1, 1, 2]
 Y_POSSIBLE_MOVES = [1, 2, 2, 1, -1, -2, -2, -1]
 
-class KnightTour:
 
+class KnightTour:
     def __init__(self, n):
         # Set size of the board
         self.n = n
@@ -18,7 +19,9 @@ class KnightTour:
 
     # CONSTRAINTS
     def is_safe(self, x, y):
-        return x >= 0 and y >= 0 and x < self.n and y < self.n and self.board[x][y] == -1
+        return (
+            x >= 0 and y >= 0 and x < self.n and y < self.n and self.board[x][y] == -1
+        )
 
     def solve(self, move_count, x, y):
         # BASE CASE is we got to the end of the board
@@ -43,6 +46,7 @@ class KnightTour:
 
     def print_result(self):
         pprint(self.board)
+
 
 k = KnightTour(8)
 if k.solve(0, 0, 0):

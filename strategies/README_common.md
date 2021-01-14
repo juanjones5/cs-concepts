@@ -45,3 +45,4 @@ This pattern uses two Heaps to solve these problems; A Min Heap to find the smal
 14. K-WAY MERGE
 15. DP: 0/1 KNAPSACK
 16. GRAPH TOPOLOGICAL SORT
+17. PERMUTATIONS
