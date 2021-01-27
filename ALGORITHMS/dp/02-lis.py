@@ -12,6 +12,7 @@ dp[i] = length of LIS on a1, a2, ..., ai WHICH INCLUDES ai
 dp[i] = 1 + max(value(keys bigger than i))
 """
 
+
 class Solution:
     def lengthOfLIS(self, nums) -> int:
         dp = [1] * len(nums)

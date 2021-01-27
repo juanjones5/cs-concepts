@@ -16,16 +16,16 @@ detination is found.
 the graph to every other vertex.
 7. Solving puzzles with only one solution, such as mazes.
 """
-from collections import defaultdict
+from collections import defaultdict, deque
+
 
 class GraphDFS:
-
     def __init__(self):
         self.graph = defaultdict(list)
 
     def add_edge(self, u, v):
         self.graph[u].append(v)
-    
+
     def dfs_iterative(self, u):
         # 1. Add the initial vertex to the stack
         stack = [u]
@@ -34,7 +34,7 @@ class GraphDFS:
         while len(stack):
             # 3. Pop and process last element of the stack
             current = stack.pop()
-            print(current, end='')
+            print(current, end="")
             # 4. Mark element as visited
             visited[current] = True
             # 5. Add all children to the stack if not visited yet
@@ -43,7 +43,7 @@ class GraphDFS:
                     stack.append(v)
 
     def dfs_recursive(self, u, visited=defaultdict(lambda: False)):
-        print(u, end='')
+        print(u, end="")
         visited[u] = True
         for v in self.graph[u]:
             if not visited[v]:
@@ -57,18 +57,18 @@ class GraphDFS:
                 self.dfs_recursive(vertex, visited)
 
 
-# Driver program to test methods of graph class  
-  
+# Driver program to test methods of graph class
+
 g = GraphDFS()
 g.add_edge(1, 0)
-g.add_edge(0, 2)  
-g.add_edge(2, 1)  
-g.add_edge(0, 3)  
-g.add_edge(1, 4)  
-  
-print("Iterative DFS")  
-g.dfs_iterative(0) 
+g.add_edge(0, 2)
+g.add_edge(2, 1)
+g.add_edge(0, 3)
+g.add_edge(1, 4)
+
+print("Iterative DFS")
+g.dfs_iterative(0)
 print()
 print("Recursive DFS")
-g.dfs_recursive(0) 
+g.dfs_recursive(0)
 print()

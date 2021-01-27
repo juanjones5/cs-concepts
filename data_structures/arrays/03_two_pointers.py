@@ -2,7 +2,7 @@
 TWO POINTERS PATTERN
 
 For sorted arrays or LinkedLists where we need to 
-find a set of elements (tuple, triplet, subarray) 
+find a set of elements (tuple, triplet, subsequence) 
 that fulfill certain constraints
 
 """
@@ -46,7 +46,7 @@ def subsequence_count_with_target_sum(nums, target_sum):
     left, right = 0, len(nums) - 1
     solution = 0
     mod = 10 ** 9 + 7
-    while left <= right:  # <= because it could be a sinle element
+    while left <= right:  # <= because it could be a single element
         current_sum = nums[left] + nums[right]
         if current_sum <= target_sum:
             nums_inside = right - left

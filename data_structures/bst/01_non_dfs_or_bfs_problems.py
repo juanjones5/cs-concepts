@@ -5,7 +5,7 @@ class TreeNode:
         self.right = right
 
 
-def closestValue(root: TreeNode, target: float) -> int:
+def closest_value(root: TreeNode, target: float) -> int:
     """
     Given a non-empty binary search tree and a target value,
     find the value in the BST that is closest to the target.

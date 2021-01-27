@@ -1,5 +1,6 @@
 import math
 from collections import defaultdict
+from typing import List
 
 """
 DYNAMIC SIZE SLIDING WINDOW PATTERN
@@ -15,9 +16,9 @@ In general, there are three variables to keep track:
 
 Constraints
 1. If a wider scope of the sliding window is valid, the 
-narrower scope of that wider scope is valid mush hold.
+narrower scope of that wider scope is valid must hold.
 2. If a narrower scope of the sliding window is invalid, the 
-wider scope of that narrower scope is invalid mush hold.
+wider scope of that narrower scope is invalid must hold.
 (this is why subarrays_with_given_sum cannot be solved)
 
 Time Complexity: O(N)
@@ -124,3 +125,23 @@ def non_repeat_substring(input_string):
         char_index_map[right_char] = window_end
         max_len = max(max_len, window_end - window_start + 1)
     return max_len
+
+
+def min_sub_array_len(s: int, nums: List[int]) -> int:
+    """
+    Given an array of n positive integers and a positive
+    integer s, find the minimal length of a contiguous
+    subarray of which the sum ≥ s. If there isn't one,
+    return 0 instead.
+    Time Complexity: O(N)
+    Space: O(1)
+    """
+    window_start = window_sum = 0
+    solution = len(nums) + 1
+    for window_end in range(len(nums)):
+        window_sum += nums[window_end]
+        while window_sum >= s:
+            solution = min(solution, window_end - window_start + 1)
+            window_sum -= nums[window_start]
+            window_start += 1
+    return solution if solution < (len(nums) + 1) else 0

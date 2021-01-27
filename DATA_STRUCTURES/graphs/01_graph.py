@@ -12,6 +12,7 @@ class Graph:
 
     def add_edge(self, u, v):
         self.graph[u].append(v)
+        # self.graph[v].append(u) # for undirected graphs
 
     def print_graph(self):
         pprint(self.graph)

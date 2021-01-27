@@ -19,7 +19,7 @@ class TreeNode:
         self.left, self.right = None, None
 
 
-def bfs(root):
+def level_by_level_traversal(root):
     """
     1. LEVEL-BY-LEVEL TRAVERSAL AS ARRAY
     Given a binary tree, populate an array to represent its

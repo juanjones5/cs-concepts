@@ -7,6 +7,7 @@ Determine whether a given graph contains Hamiltonian Cycle or not.
 If it contains, then prints the path. 
 """
 
+
 class Hamiltonian:
     def __init__(self, n, g):
         self.n = n
@@ -17,15 +18,10 @@ class Hamiltonian:
         return v in self.solution
 
     def solve(self):
-        if (
-            len(self.solution) == self.n 
-            and self.solution[len(self.sol)] == 0
-        ):
+        if len(self.solution) == self.n and self.solution[len(self.solution)] == 0:
             return True
         for i in range(self.n):
             self.solution.append(i)
             worked = self.solve()
             if worked:
                 return True
-
-Solution().hola()

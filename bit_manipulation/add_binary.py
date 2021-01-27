@@ -6,7 +6,7 @@ class Solution:
             carry = (x & y) << 1
             x, y = answer, carry
         return bin(x)[2:]
-        
+
     def addBinary(self, a: str, b: str) -> str:
         passing = "0"
         result = ""
@@ -20,7 +20,7 @@ class Solution:
         if passing == "1":
             result = passing + result
         return result
-    
+
     def add_helper(self, passing, top, bottom):
         return {
             "111": ("1", "1"),

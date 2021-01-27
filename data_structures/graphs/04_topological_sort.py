@@ -6,6 +6,7 @@ Space Complexity: O(V + E)
 """
 from collections import defaultdict, deque
 from pprint import pprint
+from typing import List
 
 
 class Graph:
@@ -46,10 +47,37 @@ class Graph:
         pprint(self.in_degree)
 
 
-# Driver code
-g = Graph()
-g.add_edge(3, 2)
-g.add_edge(3, 0)
-g.add_edge(2, 0)
-g.add_edge(2, 1)
-g.print_graph()
+def can_finish_course_schedule(numCourses: int, prerequisites: List[List[int]]) -> bool:
+    """
+    COURSE SCHEDULE PROBLEM
+    There are a total of numCourses courses you have to take,
+    labeled from 0 to numCourses-1.
+    Some courses may have prerequisites, for example to take course 0
+    you have to first take course 1, which is expressed as a pair: [0,1]
+    Given the total number of courses and a list of prerequisite pairs,
+    is it possible for you to finish all courses?
+    """
+    if not prerequisites:
+        return True
+    graph = defaultdict(list)
+    in_degree = {num: 0 for num in range(numCourses)}
+    topological_sort = []
+    # Build Graph
+    for pre in prerequisites:
+        graph[pre[1]].append(pre[0])
+        in_degree[pre[0]] += 1
+    # Find starting vertices
+    queue = deque()
+    for key in in_degree:
+        if in_degree[key] == 0:
+            queue.append(key)
+    # Build topological sort
+    while queue:
+        current = queue.popleft()
+        topological_sort.append(current)
+        for v in graph[current]:
+            in_degree[v] -= 1
+            if in_degree[v] == 0:
+                queue.append(v)
+    # Return False if the sort has a cycle
+    return len(topological_sort) == len(in_degree)

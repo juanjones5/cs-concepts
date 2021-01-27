@@ -24,7 +24,7 @@ class KnightTour:
         )
 
     def solve(self, move_count, x, y):
-        # BASE CASE is we got to the end of the board
+        # BASE CASE - GOAL we got to the end of the board
         if move_count == self.n ** 2:
             return True
         # For each square we have 8 possible moves around
@@ -32,14 +32,15 @@ class KnightTour:
             # we move to a new position
             new_x = x + X_POSSIBLE_MOVES[i]
             new_y = y + Y_POSSIBLE_MOVES[i]
-            # we check if the landing position is valid, i.e. it is in the board
+            # CONSTRAINTS
             if self.is_safe(new_x, new_y):
-                # we set the square to the int of the step number
+                # change and try, we set the square to the int of the step number
                 self.board[new_x][new_y] = move_count
-                # we solve recursively
+                # recursive call and potential return
                 is_solution = self.solve(move_count + 1, new_x, new_y)
                 if is_solution:
                     return True
+                # backtrack
                 # if we get here is because something did not work, we set to -1
                 self.board[new_x][new_y] = -1
         return False

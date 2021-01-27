@@ -96,50 +96,6 @@ def word_search(board: List[List[str]], word: str) -> bool:
     return False
 
 
-def permutations(nums: List[int]) -> List[List[int]]:
-    """
-    Given an array nums of distinct integers, return
-    all the possible permutations. You can return
-    the answer in any order.
-    Time Complexity: O(N!)
-    Space: O(N!)
-    """
-    solution = []
-
-    def backtrack(index):
-        # base case
-        if index == len(nums):
-            # IMPORTANT, create copy
-            # when mutating recursively
-            solution.append(list(nums))
-        for i in range(index, len(nums)):
-            nums[index], nums[i] = nums[i], nums[index]
-            backtrack(index + 1)
-            nums[index], nums[i] = nums[i], nums[index]
-
-    backtrack(0)
-    return solution
-
-
-def subsets(nums: List[int]) -> List[List[int]]:
-    """
-    Return all possible subsets of nums
-    Time Complexity: O(N * 2^N)
-    Space: O(N * 2^N)
-    """
-    solution = []
-
-    def backtrack(index=0, current=[]):
-        solution.append(list(current))
-        for i in range(index, len(nums)):
-            current.append(nums[i])
-            backtrack(i + 1, current)
-            current.pop()
-
-    backtrack()
-    return solution
-
-
 def max_length_concatenated_subsets(arr: List[str]) -> int:
     """
     Maximum Length of a Concatenated String with Unique Characters.
@@ -162,4 +118,39 @@ def max_length_concatenated_subsets(arr: List[str]) -> int:
                 rec(i + 1, current + arr[i])
 
     rec()
+    return solution
+
+
+def combination_sum(candidates: List[int], target: int) -> List[List[int]]:
+    """
+    Given an array of distinct integers candidates and a
+    target integer target, return a list of all unique
+    combinations of candidates where the chosen numbers
+    sum to target. You may return the combinations in any order.
+
+    The same number may be chosen from candidates an unlimited
+    number of times. Two combinations are unique if the frequency
+    of at least one of the chosen numbers is different.
+    """
+    solution = []
+
+    def backtrack(remain, current_solution, start):
+        # TWO BASE CASES, we exceeded the target or we found it
+        if remain < 0:
+            return
+        if remain == 0:
+            # IMPORTANT MAKE A DEEP COPY OF THE CURRENT
+            solution.append(list(current_solution))
+            return
+        for i in range(start, len(candidates)):
+            current_solution.append(candidates[i])
+            backtrack(
+                remain - candidates[i],
+                current_solution,
+                i,
+            )
+            # BACKTRACK CURRENT SOLUTION
+            current_solution.pop()
+
+    backtrack(target, [], 0)
     return solution
