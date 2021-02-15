@@ -126,3 +126,27 @@ def right_view(root):
             if current.right:
                 queue.append(current.right)
     return result
+
+
+def is_symmetric(self, root: TreeNode) -> bool:
+    """
+    Given a binary tree, check whether it is a mirror of itself
+    (ie, symmetric around its center).
+    Time Complexity: O(N)
+    Space: O(N)
+    """
+    queue = deque([root, root])
+    while queue:
+        node_a = queue.popleft()
+        node_b = queue.popleft()
+        if not node_a and not node_b:
+            continue
+        if not node_a or not node_b:
+            return False
+        if node_a.val != node_b.val:
+            return False
+        queue.append(node_a.left)
+        queue.append(node_b.right)
+        queue.append(node_a.right)
+        queue.append(node_b.left)
+    return True

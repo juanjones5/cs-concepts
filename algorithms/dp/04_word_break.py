@@ -40,3 +40,22 @@ def word_break_dp(s: str, wordDict: List[str]) -> bool:
             if dp[j] and s[j:i] in wordDict:
                 dp[i] = True
     return dp[len(s)]
+
+
+def word_break_all_possibilities(s: str, wordDict: List[str]) -> List[str]:
+    memo = defaultdict(list)
+
+    def rec(string):
+        if not string:
+            return [[]]
+        if string in memo:
+            return memo[string]
+        for word in wordDict:
+            if string.startswith(word):
+                res = rec(string[len(word) :])
+                for r in res:
+                    memo[string].append([word] + r)
+        return memo[string]
+
+    rec(s)
+    return [" ".join(words) for words in memo[s]]

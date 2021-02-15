@@ -65,3 +65,44 @@ def subarrays_with_sum_divisible_by(k: int, nums: List[int]) -> int:
         total += counter[(cum_sum + k) % k]
         counter[cum_sum % k] += 1
     return total
+
+
+def subarrays_with_sum_product_of(nums: List[int], k: int) -> bool:
+    """
+    Given a list of non-negative numbers and a target integer k,
+    write a function to check if the array has a continuous subarray
+    of size at least 2 that sums up to a multiple of k, that is,
+    sums up to n*k where n is also an integer.
+    """
+    cusum = 0
+    data = {0: -1}
+    for i in range(len(nums)):
+        cusum += nums[i]
+        if k != 0:
+            cusum = cusum % k
+        if cusum in data:
+            if (i - data[cusum]) >= 2:
+                return True
+        else:
+            data[cusum] = i
+    return False
+
+
+def product_except_self(nums: List[int]) -> List[int]:
+    """
+    Given an array nums of n integers where n > 1,
+    return an array output such that output[i] is equal
+    to the product of all the elements of nums except nums[i]
+    Time Complexity: O(N)
+    Space: O(1) not counting output array
+    """
+    res = [nums[0]]
+    for i in range(1, len(nums)):
+        res.append(res[-1] * nums[i])
+    for j in range(len(nums) - 1)[::-1]:
+        nums[j] *= nums[j + 1]
+    for i in range(len(nums))[::-1]:
+        left = res[i - 1] if i > 0 else 1
+        right = nums[i + 1] if i < len(nums) - 1 else 1
+        res[i] = left * right
+    return res

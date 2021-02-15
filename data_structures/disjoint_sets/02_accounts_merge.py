@@ -54,3 +54,42 @@ class Solution:
         for email in email_to_name:
             ans[d.find(email_to_id[email])].append(email)
         return [[email_to_name[v[0]]] + sorted(v) for v in ans.values()]
+
+
+def accounts_merge(accounts: List[List[str]]) -> List[List[str]]:
+    """
+    Single Function Solution
+    """
+    # 1. Initialize disjoint set
+    parent = [i for i in range(10000)]
+
+    def find(i):
+        if parent[i] != i:
+            parent[i] = find(parent[i])
+        return parent[i]
+
+    def union(i, j):
+        parent[find(i)] = find(j)
+
+    # 2. Build disjoint set
+    email_to_name = {}
+    email_to_id = {}
+    id_counter = 0
+    for acc in accounts:
+        name = acc[0]
+        for email in acc[1:]:
+            email_to_name[email] = name
+            if email not in email_to_id:
+                email_to_id[email] = id_counter
+                id_counter += 1
+            union(email_to_id[acc[1]], email_to_id[email])
+
+    # 3. Build solution from disjoint set
+    filtered_emails = defaultdict(list)
+    for email in email_to_name:
+        acc_id = find(email_to_id[email])
+        filtered_emails[acc_id].append(email)
+    result = []
+    for email_list in filtered_emails.values():
+        result.append([email_to_name[email_list[0]]] + sorted(email_list))
+    return result

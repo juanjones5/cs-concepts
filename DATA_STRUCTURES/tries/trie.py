@@ -7,7 +7,6 @@ class TrieNode:
 
 
 class Trie:
-
     # Trie data structure class
     def __init__(self):
         self.root = TrieNode()

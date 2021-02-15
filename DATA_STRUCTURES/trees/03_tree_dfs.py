@@ -93,4 +93,70 @@ def path_with_sequence(root, sequence) -> bool:
         path.append(node.val)
         if not node.left and not node.right and path == sequence:
             return True
-        return dfs(node)
+        return dfs(node, path)
+
+
+def maxPathSum(self, root: TreeNode) -> int:
+    """
+    A path in a binary tree is a sequence of nodes where
+    each pair of adjacent nodes in the sequence has an
+    edge connecting them. A node can only appear in the
+    sequence at most once. Note that the path does not
+    need to pass through the root.
+    The path sum of a path is the sum of the node's
+    values in the path.
+
+    Given the root of a binary tree, return the maximum
+    path sum of any path.
+    Time Complexity: O(N)
+    Space Complexity: O(H) height of the tree for call stack
+    """
+    max_sum = -float("inf")
+
+    def dfs(node):
+        nonlocal max_sum
+        if not node:
+            return 0
+        left = max(dfs(node.left), 0)
+        right = max(dfs(node.right), 0)
+        current = node.val + left + right
+        max_sum = max(max_sum, current)
+        return max(left, right) + node.val
+
+    dfs(root)
+    return max_sum
+
+
+def is_symmetric(root: TreeNode) -> bool:
+    """
+    Given a binary tree, check whether it is a mirror of itself
+    (ie, symmetric around its center).
+    Time Complexity: O(N)
+    Space: O(N) call stack
+    """
+
+    def compare(A, B):
+        if not A and not B:
+            return True
+        if not A or not B:
+            return False
+        return A.val == B.val and compare(A.left, B.right) and compare(A.right, B.left)
+
+    return compare(root, root)
+
+
+def lowest_common_ancestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    def dfs(node):
+        nonlocal ans
+        if not node:
+            return False
+        left = dfs(node.left)
+        right = dfs(node.right)
+        current = node == p or node == q
+        if left + right + current >= 2:
+            ans = node
+        return left or right or current
+
+    ans = None
+    dfs(root)
+    return ans
