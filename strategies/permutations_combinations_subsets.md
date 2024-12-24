@@ -7,7 +7,7 @@ Total: `N!`
 ## PERMUTATIONS ALLOWING REPETITIONS
 i.e. from numbers 1234 allowing 1111 or 2233 for example
 
-Total permutations: `N ^ N`
+Total permutations: `N^N`
 
 ## COMBINATIONS
 We DO NOT care about the order of the elements 
